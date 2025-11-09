@@ -73,8 +73,7 @@ mkdir -p build
 
 ### 2. Copy Resources
 ```bash
-# Copy image resources to build directory
-cp -r pics build/
+# Copy image resources to correct location for ClassLoader
 mkdir -p build/gui
 cp -r pics build/gui/
 ```
@@ -145,6 +144,7 @@ java -cp jade.jar:build main.Main
 ```bash
 # Verify pics directory is copied to build/gui/
 ls -la build/gui/pics/
+# Should show: auto_*.gif, tank_*.gif, baum.gif, lupe.gif, map.gif
 ```
 
 #### 3. Display Issues (Linux)
