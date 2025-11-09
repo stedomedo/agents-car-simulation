@@ -100,10 +100,10 @@ If running on a server without display:
 sudo apt-get install xvfb
 
 # Start virtual display
-Xvfb :99 -screen 0 1024x768x24 &
+Xvfb :1 -screen 0 1024x768x24 &
 
 # Run application with virtual display
-DISPLAY=:99 java -cp jade.jar:build main.Main
+DISPLAY=:1 java -cp jade.jar:build main.Main
 ```
 
 ### Windows
@@ -151,7 +151,7 @@ ls -la build/gui/pics/
 ```bash
 # For headless systems, ensure Xvfb is running
 ps aux | grep Xvfb
-export DISPLAY=:99
+export DISPLAY=:1
 ```
 
 #### 4. Java Version Compatibility
