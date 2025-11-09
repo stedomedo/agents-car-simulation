@@ -1,0 +1,27 @@
+# Compiled Java classes
+build/
+*.class
+
+# JADE platform files
+APDescription.txt
+MTPs-*.txt
+*.log
+
+# IDE files
+.vscode/
+.idea/
+*.iml
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# History files
+.history
+
+# Screenshots and temporary files
+screenshot*.png
+*.tmp
+
+# Browser screenshots
+.browser_screenshots/
