@@ -12,34 +12,42 @@ User Browser → Web VNC Interface → Docker Container → JADE Application
 
 ## 🐳 Quick Start (Local Testing)
 
-1. **Build and run with Docker Compose:**
-   ```bash
-   docker-compose up --build
-   ```
+### Option 1: Using GitHub Release (Recommended)
+```bash
+# Uses the pre-built JAR from your GitHub release
+./deploy.sh release
+```
 
-2. **Access the application:**
-   - Open your browser to: `http://localhost:6080`
-   - Click "Connect" in the noVNC interface
-   - Your JADE car simulation will appear!
+### Option 2: Build from Source
+```bash
+# Builds from source code
+docker-compose up --build
+```
+
+**Access the application:**
+- Open your browser to: `http://localhost:6080`
+- Click "Connect" in the noVNC interface
+- Your JADE car simulation will appear!
 
 ## ☁️ Cloud Deployment Options
 
 ### Option 1: Railway (Recommended - Free Tier Available)
 
-1. **Fork your repository** on GitHub
+1. **Push your deployment files** to GitHub (if not already done)
 2. **Connect to Railway:**
    - Go to [railway.app](https://railway.app)
    - Sign up with GitHub
    - Click "Deploy from GitHub repo"
-   - Select your forked repository
+   - Select your repository
 
 3. **Configure the service:**
-   - Railway will auto-detect the Dockerfile
-   - Set port to `6080`
+   - Railway will auto-detect `Dockerfile.release` (uses your GitHub release JAR)
+   - Port will be automatically set to `6080`
    - Deploy!
 
 4. **Access your app:**
    - Railway provides a public URL like `https://your-app.railway.app`
+   - No build time needed - uses your pre-built release!
 
 ### Option 2: Render (Free Tier)
 
