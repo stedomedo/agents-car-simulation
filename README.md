@@ -11,6 +11,12 @@ This simulation features:
 - **Agent Communication**: JADE-based message passing between agents
 - **Behavioral Patterns**: Complex agent interactions and decision-making
 
+## Simulation in Action
+
+![Car Simulation Demo](agent_animated.gif)
+
+*The animation shows car agents autonomously navigating the city environment, visiting petrol stations when fuel is needed, and demonstrating the multi-agent coordination system in real-time.*
+
 ## Prerequisites
 
 ### Java Development Kit (JDK)
