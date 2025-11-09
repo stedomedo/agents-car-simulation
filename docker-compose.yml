@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  jade-simulation:
+    build: .
+    ports:
+      - "6080:6080"  # Web VNC interface
+    environment:
+      - DISPLAY=:1
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+    restart: unless-stopped
+    container_name: jade-car-simulation
+    
+  # Optional: Add a reverse proxy for custom domain
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - jade-simulation
+    restart: unless-stopped
+    profiles:
+      - production
