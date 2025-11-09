@@ -4,6 +4,9 @@ on:
   release:
     types: [created]
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -23,10 +26,11 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
     
-    - name: Create JAR
-      run: ./gradlew jar
+    - name: Verify JAR exists
+      run: ls -la build/libs/
 
     - name: Upload JAR to release
       uses: softprops/action-gh-release@v2
       with:
-        files: ./build/libs/project-1.0.0.jar
+        files: build/libs/*.jar
+        token: ${{ secrets.GITHUB_TOKEN }}
