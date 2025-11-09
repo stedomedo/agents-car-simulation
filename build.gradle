@@ -1,0 +1,77 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+group = 'com.university.jade'
+version = '1.0.0'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    // JADE TiLab repository (if available)
+    maven {
+        url 'https://jade.tilab.com/maven/'
+    }
+}
+
+dependencies {
+    // Use local JADE JAR file
+    implementation files('libs/jade.jar')
+    
+    // Alternative: Try to use JADE from repository (commented out as it may not be available)
+    // implementation 'com.tilab.jade:jade:4.6.0'
+}
+
+mainClassName = 'main.Main'
+applicationDefaultJvmArgs = ['-Djava.awt.headless=false']
+
+compileJava {
+    options.compilerArgs += ['-Xlint:deprecation', '-Xlint:unchecked']
+}
+
+// Task to create executable JAR with all dependencies
+jar {
+    manifest {
+        attributes(
+            'Main-Class': 'main.Main'
+        )
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    duplicatesStrategy = 'exclude'
+}
+
+// Custom task to run with GUI support
+task runGui(type: JavaExec) {
+    group = 'application'
+    description = 'Run the JADE agents simulation with GUI support'
+    classpath = sourceSets.main.runtimeClasspath
+    main = 'main.Main'
+    jvmArgs = ['-Djava.awt.headless=false']
+}
+
+// Task to display project information
+task info {
+    doLast {
+        println """
+        JADE Agents Simulation - Gradle Build
+        =====================================
+        
+        Available tasks:
+        - gradle build          : Compile and build the project
+        - gradle run           : Run the application
+        - gradle runGui        : Run with explicit GUI support
+        - gradle jar           : Create executable JAR file
+        - gradle clean         : Clean build artifacts
+        
+        Project structure:
+        - Source code: src/main/java/
+        - Resources: src/main/resources/
+        - Local JAR: libs/jade.jar
+        
+        Build output: build/
+        """
+    }
+}

@@ -2,6 +2,12 @@
 build/
 *.class
 
+# Gradle files
+.gradle/
+gradle-app.setting
+!gradle-wrapper.jar
+!gradle-wrapper.properties
+
 # JADE platform files
 APDescription.txt
 MTPs-*.txt
