@@ -27,10 +27,10 @@ jobs:
         echo "Checking project structure..."
         ls -la
         echo "Checking for JADE dependency..."
-        grep -r "jade" build.gradle || echo "JADE dependency found in build.gradle"
+        grep -r "jade" build.gradle || echo "JADE dependency not found in build.gradle"
     
     - name: Compile with warnings
-      run: ./gradlew compileJava -Xlint:all
+      run: ./gradlew compileJava --warning-mode all
     
     - name: Build project
       run: ./gradlew build
