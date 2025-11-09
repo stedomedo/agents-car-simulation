@@ -106,6 +106,17 @@ Xvfb :1 -screen 0 1024x768x24 &
 DISPLAY=:1 java -cp jade.jar:build main.Main
 ```
 
+### macOS
+```bash
+java -cp jade.jar:build main.Main
+```
+
+**macOS-specific notes:**
+- Uses Unix-style classpath (colon separator like Linux)
+- Native display support - no virtual display needed
+- If Java is not installed, install via Homebrew: `brew install openjdk`
+- May need to allow Java in System Preferences > Security & Privacy
+
 ### Windows
 ```cmd
 java -cp jade.jar;build main.Main
@@ -154,7 +165,15 @@ ps aux | grep Xvfb
 export DISPLAY=:1
 ```
 
-#### 4. Java Version Compatibility
+#### 4. macOS Security Permissions
+If you get security warnings on macOS:
+```bash
+# Allow Java in System Preferences > Security & Privacy
+# Or run with explicit permission:
+sudo spctl --master-disable  # (not recommended for production)
+```
+
+#### 5. Java Version Compatibility
 - If using Java 9+, you may need to add JVM flags:
 ```bash
 java --add-opens java.base/java.lang=ALL-UNNAMED -cp jade.jar:build main.Main
