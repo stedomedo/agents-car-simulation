@@ -23,13 +23,13 @@ public class InfoPane extends JPanel {
     JLabel tank = new JLabel("Tank:   ");
     JLabel stations = new JLabel("Tankstellen:");
 
-    ImageIcon gelb = new ImageIcon(ClassLoader.getSystemResource("gui/pics/tank_gelb.gif"));
+    ImageIcon gelb = new ImageIcon(ClassLoader.getSystemResource("gui/tank_gelb.gif"));
     JLabel gelbL = new JLabel(gelb);
 
-    ImageIcon gruen = new ImageIcon(ClassLoader.getSystemResource("gui/pics/tank_gruen.gif"));
+    ImageIcon gruen = new ImageIcon(ClassLoader.getSystemResource("gui/tank_gruen.gif"));
     JLabel gruenL = new JLabel(gruen);
     
-    ImageIcon rot = new ImageIcon(ClassLoader.getSystemResource("gui/pics/tank_rot.gif"));
+    ImageIcon rot = new ImageIcon(ClassLoader.getSystemResource("gui/tank_rot.gif"));
     JLabel rotL = new JLabel(rot);
     
 

@@ -23,31 +23,31 @@ public class MapPane extends JPanel {
     private Image dbImage;
 
     private Image gelb = getToolkit().getImage(
-            ClassLoader.getSystemResource("gui/pics/tank_gelb.gif"));
+            ClassLoader.getSystemResource("gui/tank_gelb.gif"));
 
     private Image gruen = getToolkit().getImage(
-            ClassLoader.getSystemResource("gui/pics/tank_gruen.gif"));
+            ClassLoader.getSystemResource("gui/tank_gruen.gif"));
 
     private Image rot = getToolkit().getImage(
-            ClassLoader.getSystemResource("gui/pics/tank_rot.gif"));
+            ClassLoader.getSystemResource("gui/tank_rot.gif"));
 
     private Image baum = getToolkit().getImage(
-            ClassLoader.getSystemResource("gui/pics/baum.gif"));
+            ClassLoader.getSystemResource("gui/baum.gif"));
 
     private Image oben = getToolkit().getImage(
-            ClassLoader.getSystemResource("gui/pics/auto_oben.gif"));
+            ClassLoader.getSystemResource("gui/auto_oben.gif"));
 
     private Image unten = getToolkit().getImage(
-            ClassLoader.getSystemResource("gui/pics/auto_unten.gif"));
+            ClassLoader.getSystemResource("gui/auto_unten.gif"));
 
     private Image links = getToolkit().getImage(
-            ClassLoader.getSystemResource("gui/pics/auto_links.gif"));
+            ClassLoader.getSystemResource("gui/auto_links.gif"));
 
     private Image rechts = getToolkit().getImage(
-            ClassLoader.getSystemResource("gui/pics/auto_rechts.gif"));
+            ClassLoader.getSystemResource("gui/auto_rechts.gif"));
     
     private Image map = getToolkit().getImage(
-            ClassLoader.getSystemResource("gui/pics/map.gif"));
+            ClassLoader.getSystemResource("gui/map.gif"));
 
     private Graphics dbGraphics;
 

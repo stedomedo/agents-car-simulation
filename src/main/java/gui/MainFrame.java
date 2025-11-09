@@ -46,7 +46,7 @@ public class MainFrame extends JFrame implements ActionListener {
         setSize(600, 600);
         setTitle("Agenten - Hauptframe");
         Image img = getToolkit().getImage(
-                ClassLoader.getSystemResource("gui/pics/lupe.gif"));
+                ClassLoader.getSystemResource("gui/lupe.gif"));
         setIconImage(img);
 
         JMenuBar menubar = new JMenuBar();
