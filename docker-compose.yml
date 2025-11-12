@@ -4,8 +4,7 @@ services:
   jade-simulation:
     build:
       context: .
-      dockerfile: Dockerfile.release
-    container_name: jade-car-simulation-release
+    container_name: jade-car-simulation
     ports:
       - "6080:6080"
     environment:
