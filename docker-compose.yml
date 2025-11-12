@@ -2,19 +2,26 @@ version: '3.8'
 
 services:
   jade-simulation:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.release
+    container_name: jade-car-simulation-release
     ports:
-      - "6080:6080"  # Web VNC interface
+      - "6080:6080"
     environment:
       - DISPLAY=:1
-    volumes:
-      - /tmp/.X11-unix:/tmp/.X11-unix:rw
     restart: unless-stopped
-    container_name: jade-car-simulation
-    
-  # Optional: Add a reverse proxy for custom domain
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:6080/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Optional: Nginx reverse proxy for production
   nginx:
     image: nginx:alpine
+    container_name: jade-nginx
     ports:
       - "80:80"
     volumes:

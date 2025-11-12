@@ -12,16 +12,9 @@ User Browser → Web VNC Interface → Docker Container → JADE Application
 
 ## 🐳 Quick Start (Local Testing)
 
-### Option 1: Using GitHub Release (Recommended)
 ```bash
-# Uses the pre-built JAR from your GitHub release
-./deploy.sh release
-```
-
-### Option 2: Build from Source
-```bash
-# Builds from source code
-docker-compose up --build
+# Start the application (uses GitHub release JAR)
+./deploy.sh up
 ```
 
 **Access the application:**
@@ -41,7 +34,7 @@ docker-compose up --build
    - Select your repository
 
 3. **Configure the service:**
-   - Railway will auto-detect `Dockerfile.release` (uses your GitHub release JAR)
+   - Railway will auto-detect the Dockerfile (uses your GitHub release JAR)
    - Port will be automatically set to `6080`
    - Deploy!
 
