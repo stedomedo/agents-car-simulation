@@ -26,9 +26,6 @@ WORKDIR /app
 RUN curl -L -o agents-car-simulation.jar \
     "https://github.com/stedomedo/agents-car-simulation/releases/download/agents-openhands/agents-car-simulation-1.0.0.jar"
 
-# Verify the JAR was downloaded
-RUN ls -la agents-car-simulation.jar && file agents-car-simulation.jar
-
 # Create startup script
 RUN echo '#!/bin/bash\n\
 export DISPLAY=:1\n\
