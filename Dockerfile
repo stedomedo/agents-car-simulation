@@ -6,8 +6,10 @@ FROM ubuntu:22.04
 # Install dependencies (non-interactive)
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=UTC
+ENV DISPLAY=:1
 RUN apt-get update && apt-get install -y \
-    openjdk-21-jre-headless \
+    openjdk-21-jdk \
+    openjdk-21-jre \
     python3 \
     python3-pip \
     xvfb \
@@ -76,6 +78,9 @@ sleep 3\n\
 \n\
 # Start the Java application\n\
 echo "Starting JADE Car Simulation..."\n\
+echo "DISPLAY variable: $DISPLAY"\n\
+echo "Testing X connection..."\n\
+xdpyinfo -display :1 | head -5\n\
 cd /app\n\
 java -jar agents-car-simulation.jar\n\
 ' > /app/start.sh && chmod +x /app/start.sh
