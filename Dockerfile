@@ -6,6 +6,7 @@ FROM ubuntu:22.04
 # Install dependencies
 RUN apt-get update && apt-get install -y \
     openjdk-21-jre-headless \
+    python3 \
     xvfb \
     x11vnc \
     fluxbox \
