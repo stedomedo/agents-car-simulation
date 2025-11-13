@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: jade-car-simulation
+    env: docker
+    plan: free
+    region: oregon
+    healthCheckPath: /
+    envVars:
+      - key: PORT
+        value: 6080

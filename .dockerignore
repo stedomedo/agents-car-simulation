@@ -1,0 +1,33 @@
+# Build artifacts
+build/
+.gradle/
+gradle-app.setting
+!gradle-wrapper.jar
+!gradle-wrapper.properties
+
+# IDE files
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# Documentation (not needed in container)
+README.md
+DEPLOYMENT.md
+*.md
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
