@@ -32,6 +32,9 @@ WORKDIR /app
 RUN curl -L -o agents-car-simulation.jar \
     "https://github.com/stedomedo/agents-car-simulation/releases/download/agents-openhands/agents-car-simulation-1.0.0.jar"
 
+# Copy JADE library
+COPY libs/jade.jar jade.jar
+
 # Create startup script
 RUN echo '#!/bin/bash\n\
 set -e\n\
@@ -82,6 +85,10 @@ echo "DISPLAY variable: $DISPLAY"\n\
 echo "Testing X connection..."\n\
 xdpyinfo -display :1 | head -5\n\
 cd /app\n\
+# Start JADE in standalone mode (no separate platform process)\n\
+java -cp "agents-car-simulation.jar:jade.jar" jade.Boot -gui -nomtp &\n\
+sleep 3\n\
+# Start the car simulation application\n\
 java -jar agents-car-simulation.jar\n\
 ' > /app/start.sh && chmod +x /app/start.sh
 
