@@ -7,6 +7,7 @@ FROM ubuntu:22.04
 RUN apt-get update && apt-get install -y \
     openjdk-21-jre-headless \
     python3 \
+    python3-pip \
     xvfb \
     x11vnc \
     fluxbox \
@@ -14,11 +15,10 @@ RUN apt-get update && apt-get install -y \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Install noVNC for web access
+# Install noVNC and websockify
 RUN wget -qO- https://github.com/novnc/noVNC/archive/v1.4.0.tar.gz | tar xz -C /opt \
     && mv /opt/noVNC-1.4.0 /opt/novnc \
-    && wget -qO- https://github.com/novnc/websockify/archive/v0.11.0.tar.gz | tar xz -C /opt \
-    && mv /opt/websockify-0.11.0 /opt/websockify
+    && pip3 install websockify
 
 # Create app directory
 WORKDIR /app
@@ -34,7 +34,7 @@ Xvfb :1 -screen 0 1024x768x16 &\n\
 sleep 2\n\
 fluxbox &\n\
 x11vnc -display :1 -nopw -listen localhost -xkb -ncache 10 -ncache_cr -forever &\n\
-cd /opt/websockify && python3 websockify.py --web=/opt/novnc 6080 localhost:5900 &\n\
+websockify --web=/opt/novnc 6080 localhost:5900 &\n\
 sleep 3\n\
 cd /app\n\
 java -jar agents-car-simulation.jar\n\
