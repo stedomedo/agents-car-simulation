@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y \
     python3-pip \
     xvfb \
     x11vnc \
+    x11-utils \
     fluxbox \
     wget \
     curl \
@@ -31,13 +32,50 @@ RUN curl -L -o agents-car-simulation.jar \
 
 # Create startup script
 RUN echo '#!/bin/bash\n\
+set -e\n\
+\n\
+# Clean up any existing X server files\n\
+rm -f /tmp/.X1-lock /tmp/.X11-unix/X1\n\
+\n\
+# Set display\n\
 export DISPLAY=:1\n\
-Xvfb :1 -screen 0 1024x768x16 &\n\
-sleep 2\n\
+\n\
+# Start Xvfb (virtual framebuffer)\n\
+echo "Starting Xvfb..."\n\
+Xvfb :1 -screen 0 1024x768x16 -ac +extension GLX +render -noreset &\n\
+XVFB_PID=$!\n\
+\n\
+# Wait for X server to be ready\n\
+echo "Waiting for X server to start..."\n\
+for i in {1..30}; do\n\
+    if xdpyinfo -display :1 >/dev/null 2>&1; then\n\
+        echo "X server is ready"\n\
+        break\n\
+    fi\n\
+    if [ $i -eq 30 ]; then\n\
+        echo "X server failed to start"\n\
+        exit 1\n\
+    fi\n\
+    sleep 1\n\
+done\n\
+\n\
+# Start window manager\n\
+echo "Starting fluxbox..."\n\
 fluxbox &\n\
-x11vnc -display :1 -nopw -listen localhost -xkb -ncache 10 -ncache_cr -forever &\n\
+sleep 2\n\
+\n\
+# Start VNC server\n\
+echo "Starting x11vnc..."\n\
+x11vnc -display :1 -nopw -listen localhost -xkb -ncache 10 -ncache_cr -forever -bg\n\
+sleep 2\n\
+\n\
+# Start websockify\n\
+echo "Starting websockify..."\n\
 websockify --web=/opt/novnc 6080 localhost:5900 &\n\
 sleep 3\n\
+\n\
+# Start the Java application\n\
+echo "Starting JADE Car Simulation..."\n\
 cd /app\n\
 java -jar agents-car-simulation.jar\n\
 ' > /app/start.sh && chmod +x /app/start.sh
