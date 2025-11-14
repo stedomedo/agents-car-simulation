@@ -6,11 +6,28 @@ A multi-agent system simulation built with JADE (Java Agent DEvelopment Framewor
 
 ![Agent Animation](agent_animated.gif)
 
+A release on Github can be used directly with **Docker + Web VNC** to run the application locally in your browser without installation.
+```bash
+# Start the application (uses GitHub release JAR)
+./deploy.sh up
+```
+
+
 ## Quick Start
 
 ### Prerequisites
 - **Java**: JDK 8+ (recommended: OpenJDK 11, 17, or 21)
 - **Display**: GUI requires X11 (Linux/macOS) or Windows display
+
+Example for MacOS setup:
+```bash
+# Install Java via Homebrew
+brew install openjdk@11
+
+# Add to PATH (add to ~/.zshrc)
+export PATH="/opt/homebrew/opt/openjdk@11/bin:$PATH"
+```
+
 
 ### Build and Run
 ```bash
@@ -22,6 +39,9 @@ A multi-agent system simulation built with JADE (Java Agent DEvelopment Framewor
 gradle build
 gradle run
 ```
+
+For more options and a browser-based application see [Deployment](./DEPLOYMENT.md).
+
 
 ### Expected Output
 - JADE platform initialization messages
@@ -55,66 +75,6 @@ java -cp "libs/jade.jar:build/libs/project-1.0.0.jar" main.Main
 ./gradlew run -Djava.awt.headless=true
 ```
 
-## macOS Setup
-
-### Installation
-```bash
-# Install Java via Homebrew
-brew install openjdk@11
-
-# Add to PATH (add to ~/.zshrc)
-export PATH="/opt/homebrew/opt/openjdk@11/bin:$PATH"
-```
-
-### Security Permissions
-If blocked by macOS security:
-1. Go to **System Preferences > Security & Privacy > Privacy > Accessibility**
-2. Add Java or Terminal to allowed applications
-3. Or temporarily: `sudo spctl --master-disable` (remember to re-enable)
-
-## Troubleshooting
-
-### Build Issues
-```bash
-# Check versions
-java -version
-./gradlew --version
-
-# Clean rebuild
-./gradlew clean build
-```
-
-### Runtime Issues
-```bash
-# Check JADE platform
-./gradlew run --info
-
-# Linux: X11 display issues
-echo $DISPLAY
-sudo apt-get install xorg
-
-# Virtual display (headless Linux)
-Xvfb :1 -screen 0 1024x768x24 &
-export DISPLAY=:1
-./gradlew run
-```
-
-### Memory Issues
-Add to `build.gradle`:
-```gradle
-run {
-    jvmArgs = ['-Xmx2g', '-Xms512m']
-}
-```
-
-### JAR Execution
-```bash
-# Verify JAR contents
-jar -tf build/libs/project-1.0.0.jar | head -10
-
-# Debug classpath
-java -cp "libs/jade.jar:build/libs/project-1.0.0.jar" -verbose:class main.Main
-```
 
 ## Development Notes
 
@@ -123,6 +83,3 @@ java -cp "libs/jade.jar:build/libs/project-1.0.0.jar" -verbose:class main.Main
 - **GUI**: Java Swing with real-time agent visualization
 - **Historical**: Early 2000s agent-based modeling example
 
-## License
-
-Academic coursework project. Respect institutional guidelines for code sharing.
